@@ -19,16 +19,23 @@ namespace FirstAPI
 {
     public class Startup
     {
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
+     
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+            options.AddDefaultPolicy(builder =>{
+                builder.WithOrigins("http://localhost:4200");
+            });
+            });
             services.AddDbContext<HrContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:hrCon"]);
@@ -52,7 +59,7 @@ namespace FirstAPI
             }
 
             app.UseRouting();
-
+            app.UseCors();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

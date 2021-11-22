@@ -1,5 +1,6 @@
 ﻿using FirstAPI.Interfaces;
 using FirstAPI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ namespace FirstAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors()]
     public class UserController : ControllerBase
     {
         private readonly IUser _userService;
