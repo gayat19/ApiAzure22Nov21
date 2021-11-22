@@ -33,7 +33,7 @@ namespace FirstAPI
             services.AddCors(options =>
             {
             options.AddDefaultPolicy(builder =>{
-                builder.WithOrigins("http://localhost:4200");
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             });
             });
             services.AddDbContext<HrContext>(options =>
